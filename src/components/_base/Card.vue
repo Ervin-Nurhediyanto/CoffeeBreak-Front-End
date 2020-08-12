@@ -1,23 +1,23 @@
 <template>
-    <div class="card">
-  <img :src="url" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{name}}</h5>
-    <p class="card-text">{{price}}</p>
-    <button class="btn btn-primary" @click="$emit('toggle-event', id)">Hapus item</button>
+  <div>
+    <img class="image" :src="image" />
+    <h5>{{name}}</h5>
+    <h4>Rp. {{price}}</h4>
   </div>
-</div>
 </template>
 
 <script>
 export default {
   name: 'Card',
-  props: ['name', 'url', 'id']
+  props: ['name', 'image', 'price']
 }
 </script>
 
 <style scoped>
-.card{
-    margin: 10px !important;
+.image {
+  width: 220px;
+  height: 180px;
+  border-radius: 10px 10px 0px 0px;
 }
+
 </style>

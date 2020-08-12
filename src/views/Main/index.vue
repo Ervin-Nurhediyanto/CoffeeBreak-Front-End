@@ -1,22 +1,22 @@
 <template>
     <div>
-        <Navbar/>
+        <!-- <Navbar/> -->
         <div class="cos-container">
         <router-view/>
         </div>
-        <Footer />
+        <!-- <Footer /> -->
     </div>
 </template>
 
 <script>
-import Navbar from '../../components/_base/Navbar'
-import Footer from '../../components/_base/Footer'
+// import Navbar from '../../components/_base/Navbar'
+// import Footer from '../../components/_base/Footer'
 
 export default {
   name: 'Main',
   components: {
-    Navbar,
-    Footer
+    // Navbar,
+    // Footer
   }
 }
 </script>

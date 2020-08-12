@@ -1,26 +1,54 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <router-link class="nav-link active" to="/home">Home <span class="sr-only">(current)</span></router-link>
-      <router-link class="nav-link" to="/history">History</router-link>
-      <router-link class="nav-link" to="#">About</router-link>
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-    </div>
-  </div>
-</nav>
+  <nav class="col-md-1 col-sm-1 p-md-3 p-sm-1">
+    <img class="icon" src="../../assets/fork.png" @click="linkHome"/>
+    <img class="icon" src="../../assets/clipboard.png" @click="linkHistory" />
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+      <img class="icon" src="../../assets/add.png" />
+    </button>
+  </nav>
 </template>
 
 <script>
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  methods: {
+    linkHistory () {
+      this.$router.push({
+        name: 'history'
+        // params: { id: 5, name: 'risano', email: 'risa@gamil.com' },
+        // query: { search: 'akbar' }
+      })
+    },
+    linkHome () {
+      this.$router.push({
+        name: 'home'
+      })
+    }
+  }
 }
 </script>
 
 <style scoped>
+.icon {
+  width: 35px;
+  height: 35px;
+  margin-left: 5px;
+}
 
+/* Nav */
+
+nav {
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+nav .icon {
+  margin-top: 20px;
+}
+
+nav button.btn-primary {
+  background-color: transparent;
+  padding-left: 0;
+  border: 0;
+}
 </style>
