@@ -19,5 +19,8 @@ export default {
   height: 180px;
   border-radius: 10px 10px 0px 0px;
 }
+div{
+  margin: 10px;
+}
 
 </style>

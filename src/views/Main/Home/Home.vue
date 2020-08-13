@@ -10,42 +10,52 @@
         <div class="row">
           <Navbar />
           <main class="col-md-11 col-sm-11">
-            <div class="row justify-content-center">
-              <article v-for="product in products" :key="product.id">
-              <Card :name="product.name" :image="product.image" :price="product.price" v-on:toggle-event="clikBtn" />
-              </article>
-            </div>
-          </main>
+    <div class="row yellow">
+      <article class="row justify-content-center blue" v-for="product in products" :key="product.id">
+        <Card class="red"
+          :name="product.name"
+          :image="product.image"
+          :price="product.price"
+          v-on:toggle-event="clikBtn"
+        />
+      </article>
+      <article class="page row justify-content-between">
+        <!-- <h4 class ="red" @click="prevPage">prev</h4>
+        <h4 class ="green">page {{page}}</h4>
+        <h4 class ="blue" @click="nextPage">next</h4> -->
+
+          <button @click="prevPage" value="1">prev</button>
+          <h4 class ="green">page {{page}}</h4>
+          <button @click="nextPage" value="2">prev</button>
+          <input :value='search'>
+      </article>
+      <article>
+      <form @submit="formSubmit">
+                        <strong>Name:</strong>
+                        <input type="text" class="form-control" v-model="name">
+                        <strong>Price:</strong>
+                        <textarea class="form-control" v-model="price"></textarea>
+                        <strong>Image:</strong>
+                        <input type="text" class="form-control" v-model="image">
+                        <strong>Category:</strong>
+                        <input type="text" class="form-control" v-model="idCategory">
+                        <button class="btn btn-success">Submit</button>
+                        </form>
+      </article>
+    </div>
+  </main>
         </div>
       </div>
-      <aside class="col-md-3 p-md-0 col-sm-3 p-sm-0">
-        <div class="row cart m-md-0 m-sm-0 justify-content-center">
-          <h2>
-            Cart
-            <span class="count">0</span>
-          </h2>
-        </div>
-        <div class="row list m-md-0 m-sm-0">
-          <div class="col">
-            <div class="row p-md-3 p-sm-1 d-flex justify-content-center">
-              <img class="image-empty" src="../../../assets/food-and-restaurant.png" />
-            </div>
-            <div class="row d-flex justify-content-center">
-              <h3>Your cart is empty</h3>
-            </div>
-            <div class="row d-flex justify-content-center">
-              <h4>Please add some items from the menu</h4>
-            </div>
-          </div>
-        </div>
-      </aside>
+      <Sidebar />
     </div>
   </div>
 </template>
 
 <script>
 import Header from '../../../components/_base/Header'
-import Navbar from '../../..//components/_base/Navbar'
+import Navbar from '../../../components/_base/Navbar'
+// import Product from '../../../components/_base/Product'
+import Sidebar from '../../../components/_base/Sidebar'
 import Card from '../../../components/_base/Card'
 import axios from 'axios'
 
@@ -54,12 +64,23 @@ export default {
   components: {
     Header,
     Navbar,
+    // Product,
+    Sidebar,
     Card
   },
   data () {
     return {
-      products: []
+      products: [],
+      page: '',
+      search: '',
+      name: '',
+      price: '',
+      image: '',
+      idCategory: ''
     }
+  },
+  mounted () {
+    this.getData()
   },
   methods: {
     linkHistory () {
@@ -69,15 +90,58 @@ export default {
         query: { search: 'akbar' }
       })
     },
+    prevPage () {
+      const prevPage = this.page - 1
+      axios.get(`http://localhost:4000/api/v1/products/?page=${prevPage}`)
+        .then((res) => {
+          this.products = res.data.result
+          this.page = res.data.page
+        })
+    },
+    // thisPage () {
+    //   this.$router.push({
+    //     name: 'history',
+    //     params: { id: 5, name: 'risano', email: 'risa@gamil.com' },
+    //     query: { search: 'akbar' }
+    //   })
+    // },
+    nextPage () {
+      let nextPage = this.page
+      nextPage += 1
+      this.$router.push({
+        name: 'home',
+        query: { page: nextPage }
+      })
+
+      // axios.get(`http://localhost:4000/api/v1/products/?page=${nextPage}`)
+      //   .then((res) => {
+      //     this.products = res.data.result
+      //     this.page = res.data.page
+      //   })
+    },
     getData () {
       axios.get('http://localhost:4000/api/v1/products')
         .then((res) => {
           this.products = res.data.result
+          // this.page = res.data.page
         })
+    },
+    postData () {
+      formSubmit(e) {
+                e.preventDefault();
+                let currentObj = this;
+                this.axios.post('http://localhost:4000/api/v1/products', {
+                    name: this.name,
+                    description: this.description
+                })
+                .then(function (response) {
+                    currentObj.output = response.data;
+                })
+                .catch(function (error) {
+                    currentObj.output = error;
+                })
+            }
     }
-  },
-  mounted () {
-    this.getData()
   }
 }
 </script>
@@ -114,17 +178,28 @@ export default {
 }
 
 /* End-Background Check */
-
-.image-empty {
-  width: 250px;
-  height: 270px;
-}
-
 h2,
 h3,
 h4,
 button {
   font-family: Airbnb Cereal App;
+}
+/* Article */
+
+article {
+  padding: 20px;
+}
+
+article.page {
+  width: 100%;
+}
+
+article .select {
+  margin-bottom: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Main */
@@ -147,19 +222,11 @@ main .menu {
 .menu .row {
   justify-content: center;
 }
-
-/* Article */
-
-article {
-  padding: 20px;
+main div {
+    padding: 0;
 }
-
-article .select {
-  margin-bottom: 5px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+article {
+    margin:0;
 }
 
 /* article h6.text {
@@ -177,75 +244,6 @@ article .select .image {
   height: 40px;
   background-image: url("../../../assets/tick.png");
   background-size: 40px;
-}
-
-/* Aside */
-
-aside {
-  background: #ffffff;
-  border: 1px solid #cecece;
-}
-
-aside .cart {
-  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
-  padding: 20px;
-}
-
-aside .cart .count {
-  background: #57cad5;
-  border-radius: 100%;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-size: 20px;
-  line-height: 26px;
-  color: #ffffff;
-}
-
-/* Aside List */
-
-aside {
-  width: 30%;
-  background: #ffffff;
-  border: 1px solid #cecece;
-}
-
-aside .row {
-  justify-content: center;
-}
-
-aside .cart {
-  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
-  padding: 20px;
-}
-
-aside .count {
-  background: #57cad5;
-  border-radius: 100%;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-size: 20px;
-  line-height: 26px;
-  color: #ffffff;
-}
-
-aside .list img {
-  padding-top: 50px;
-}
-
-aside h2 {
-  font-size: 30px;
-  line-height: 40px;
-}
-
-aside h3 {
-  font-size: 25px;
-  line-height: 40px;
-}
-
-aside h4 {
-  font-size: 12px;
-  line-height: 25px;
-  color: #cecece;
 }
 
 /* Modal */
