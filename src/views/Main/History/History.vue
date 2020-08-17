@@ -1,615 +1,69 @@
 <template>
   <div class="container-fluid">
-    <header class="row pt-md-3 pb-md-3 pt-sm-3 pb-sm-3">
-      <div class="col-md-1 col-sm-1 d-flex justify-content-center">
-        <img class="icon" src="../../../assets/menu.png" />
-      </div>
-      <div class="col-md-11 col-sm-11 d-flex justify-content-center">
-        <h4>History</h4>
-      </div>
-    </header>
-    <div class="row pb-md-3 pb-sm-3">
+    <Header />
+    <div class="row">
       <Navbar />
-      <main class="col-md-11 col-sm-11">
-        <div class="row">
-          <div class="col-md-4 p-md-4 col-sm-4 p-sm-3">
-            <div class="col d-flex align-content-center flex-wrap today">
-              <div class="row">
-                <div class="col pl-md-5">
-                  <h5>Today’s Income</h5>
-                  <h3>Rp.1.000.000</h3>
-                  <h5>+2% Yesterday</h5>
-                </div>
-              </div>
-              <div class="elipse1"></div>
-              <div class="elipse2"></div>
-              <div class="elipse3"></div>
-            </div>
-          </div>
-          <div class="col-md-4 p-md-4 col-sm-4 p-sm-3">
-            <div class="col d-flex align-content-center flex-wrap order">
-              <div class="row">
-                <div class="col pl-md-5">
-                  <h5>Orders</h5>
-                  <h3>3.270</h3>
-                  <h5>+5% Last Week</h5>
-                </div>
-              </div>
-              <div class="elipse1"></div>
-              <div class="elipse2"></div>
-              <div class="elipse3"></div>
-            </div>
-          </div>
-          <div class="col-md-4 p-md-4 col-sm-4 p-sm-3">
-            <div class="col d-flex align-content-center flex-wrap year">
-              <div class="row">
-                <div class="col pl-md-5">
-                  <h5>This Year’s Income</h5>
-                  <h3>Rp.100.000.000.000</h3>
-                  <h5>+10% Last Year</h5>
-                </div>
-              </div>
-              <div class="elipse1"></div>
-              <div class="elipse2"></div>
-              <div class="elipse3"></div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col m-md-4 m-sm-4 revenue">
-            <div class="row p-md-3 p-sm-3 d-flex justify-content-between">
-              <h3>Revenue</h3>
-              <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >Month</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">January</a>
-                  <a class="dropdown-item" href="#">February</a>
-                  <a class="dropdown-item" href="#">March</a>
-                  <a class="dropdown-item" href="#">April</a>
-                  <a class="dropdown-item" href="#">May</a>
-                  <a class="dropdown-item" href="#">June</a>
-                  <a class="dropdown-item" href="#">July</a>
-                  <a class="dropdown-item" href="#">August</a>
-                  <a class="dropdown-item" href="#">September</a>
-                  <a class="dropdown-item" href="#">October</a>
-                  <a class="dropdown-item" href="#">November</a>
-                  <a class="dropdown-item" href="#">December</a>
-                </div>
-              </div>
-            </div>
-            <div class="row p-md-3 p-sm-3">
-              <table>
-                <tr>
-                  <th>50k</th>
-                  <td rowspan="8"></td>
-                  <!-- date 3 -->
-                  <td rowspan="4"></td>
-                  <td rowspan="3"></td>
-                  <td rowspan="7"></td>
-                  <!-- date 6 -->
-                  <td rowspan="3"></td>
-                  <td rowspan="2"></td>
-                  <td rowspan="7"></td>
-                  <!-- date 9 -->
-                  <td rowspan="4"></td>
-                  <td rowspan="5"></td>
-                  <td rowspan="7"></td>
-                  <!-- date 12 -->
-                  <td rowspan="3"></td>
-                  <td rowspan="4"></td>
-                  <td rowspan="7"></td>
-                  <!-- date 15 -->
-                  <td rowspan="3"></td>
-                  <td rowspan="1"></td>
-                  <td rowspan="7"></td>
-                  <!-- date 18 -->
-                  <td rowspan="1"></td>
-                  <td rowspan="3"></td>
-                  <td rowspan="7"></td>
-                  <!-- date 21 -->
-                  <td rowspan="3"></td>
-                  <td rowspan="6" class="lastMonth"></td>
-                  <td rowspan="7"></td>
-                  <!-- date 24 -->
-                  <td rowspan="6" class="thisMonth"></td>
-                  <td rowspan="4"></td>
-                  <td rowspan="7"></td>
-                  <!-- date 27 -->
-                  <td rowspan="1"></td>
-                  <td rowspan="2"></td>
-                  <td rowspan="7"></td>
-                  <!-- date 30 -->
-                  <td rowspan="2"></td>
-                  <td rowspan="1"></td>
-                  <td rowspan="7"></td>
-                  <td colspan="3" class="info">This Month :</td>
-                  <td colspan="2" class="thisMonth info"></td>
-                </tr>
-                <tr>
-                  <th>40k</th>
-                  <td rowspan="5" class="lastMonth"></td>
-                  <td rowspan="5" class="thisMonth"></td>
-                  <td rowspan="5" class="thisMonth"></td>
-                  <td rowspan="5" class="lastMonth"></td>
-                  <td colspan="3" class="info">Last Month :</td>
-                  <td colspan="2" class="lastMonth info"></td>
-                </tr>
-                <tr>
-                  <th>30k</th>
-                  <td rowspan="4" class="lastMonth"></td>
-                  <td rowspan="4" class="lastMonth"></td>
-                  <td rowspan="4" class="thisMonth"></td>
-                  <td rowspan="5"></td>
-                  <td rowspan="5"></td>
-                  <td rowspan="5"></td>
-                  <td rowspan="5"></td>
-                  <td rowspan="5"></td>
-                </tr>
-                <tr>
-                  <th>20k</th>
-                  <td rowspan="3" class="lastMonth"></td>
-                  <td rowspan="3" class="thisMonth"></td>
-                  <td rowspan="3" class="thisMonth"></td>
-                  <td rowspan="3" class="thisMonth"></td>
-                  <td rowspan="3" class="lastMonth"></td>
-                  <td rowspan="3" class="thisMonth"></td>
-                </tr>
-                <tr>
-                  <th>10k</th>
-                  <td rowspan="2" class="thisMonth"></td>
-                  <td rowspan="2" class="thisMonth"></td>
-                  <td rowspan="2" class="lastMonth"></td>
-                  <td rowspan="2" class="lastMonth"></td>
-                </tr>
-                <tr>
-                  <th>0</th>
-                  <td class="lastMonth"></td>
-                </tr>
-                <tr>
-                  <th class="date">Date</th>
-                  <td colspan="2">3</td>
-                  <td colspan="2">6</td>
-                  <td colspan="2">9</td>
-                  <td colspan="2">12</td>
-                  <td colspan="2">15</td>
-                  <td colspan="2">18</td>
-                  <td colspan="2">21</td>
-                  <td colspan="2">24</td>
-                  <td colspan="2">27</td>
-                  <td colspan="2">30</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col m-md-4 m-sm-4 recent">
-            <div class="row p-md-3 p-sm-3 d-flex justify-content-between">
-              <h3>Recent Order</h3>
-              <div class="dropdown">
-                <button
-                  class="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >Today</button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">1</a>
-                  <a class="dropdown-item" href="#">2</a>
-                  <a class="dropdown-item" href="#">3</a>
-                  <a class="dropdown-item" href="#">4</a>
-                  <a class="dropdown-item" href="#">5</a>
-                  <a class="dropdown-item" href="#">6</a>
-                  <a class="dropdown-item" href="#">7</a>
-                  <a class="dropdown-item" href="#">8</a>
-                  <a class="dropdown-item" href="#">9</a>
-                  <a class="dropdown-item" href="#">10</a>
-                  <a class="dropdown-item" href="#">11</a>
-                  <a class="dropdown-item" href="#">12</a>
-                  <a class="dropdown-item" href="#">13</a>
-                  <a class="dropdown-item" href="#">14</a>
-                  <a class="dropdown-item" href="#">15</a>
-                  <a class="dropdown-item" href="#">16</a>
-                  <a class="dropdown-item" href="#">17</a>
-                  <a class="dropdown-item" href="#">18</a>
-                  <a class="dropdown-item" href="#">19</a>
-                  <a class="dropdown-item" href="#">20</a>
-                  <a class="dropdown-item" href="#">21</a>
-                  <a class="dropdown-item" href="#">22</a>
-                  <a class="dropdown-item" href="#">23</a>
-                  <a class="dropdown-item" href="#">24</a>
-                  <a class="dropdown-item" href="#">25</a>
-                  <a class="dropdown-item" href="#">26</a>
-                  <a class="dropdown-item" href="#">27</a>
-                  <a class="dropdown-item" href="#">28</a>
-                  <a class="dropdown-item" href="#">29</a>
-                  <a class="dropdown-item" href="#">30</a>
-                  <a class="dropdown-item" href="#">31</a>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="row">
-                  <div class="col">
-                    <table>
-                      <tr>
-                        <th class="left">INVOICES</th>
-                        <th>CASHIER</th>
-                        <th>DATE</th>
-                        <th>ORDERS</th>
-                        <th>AMOUNT</th>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-                <div class="row line"></div>
-                <div class="row">
-                  <div class="col">
-                    <table>
-                      <tr>
-                        <td class="left">#10928</td>
-                        <td>Cashier 1</td>
-                        <td>06 October 2019</td>
-                        <td>Ice Tea, Salad With peanut sauce</td>
-                        <td>Rp.120.000</td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <main class="mainbar">
+        <Card />
+        <Revenue />
+        <Recent />
       </main>
     </div>
+    <AddProduct />
   </div>
 </template>
 
 <script>
-import Navbar from '../../../components/_base/Navbar'
+import Header from '../../../components/History/Header'
+import Navbar from '../../../components/History/Navbar'
+import Card from '../../../components/History/card'
+import Revenue from '../../../components/History/Revenue'
+import Recent from '../../../components/History/RecentOrder'
+import AddProduct from '../../../components/Home/Modal-Add'
+
 export default {
-  name: 'History',
+  name: 'Histoy',
+  data () {
+    return {
+      menu: true
+    }
+  },
   components: {
-    Navbar
+    Navbar,
+    Header,
+    Card,
+    Revenue,
+    Recent,
+    AddProduct
   }
 }
 </script>
 
 <style scoped>
-/* Background Check */
-
-.red {
-  background-color: red;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.green {
-  background-color: green;
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-/* Image, Text */
-
-.icon {
-  width: 35px;
-  height: 35px;
-}
-
-.image {
-  width: 250px;
-  height: 200px;
-  border-radius: 10px 10px 0px 0px;
-}
-
-h3,
-h4,
-h5,
-button,
-table th,
-table td {
-  font-family: Airbnb Cereal App;
-}
-
-h3 {
-  font-size: 25px;
-  font-weight: bold;
-}
-
-h5 {
-  font-size: 12px;
-  font-weight: bold;
-}
-
-/* header */
-
-header {
-  background: #ffffff;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-}
-
-header h4 {
-  font-size: 30px;
-  line-height: 40px;
-}
-
-/* nav */
-
-nav {
-  background: #ffffff;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-}
-
-/* main */
-
-main .today,
-main .order,
-main .year {
-  border-radius: 10px;
-  height: 180px;
-}
-
-main .today {
-  background: linear-gradient(
-    285.38deg,
-    #fbb2b4 30.05%,
-    rgba(255, 143, 178, 0) 133.19%
-  );
-  filter: drop-shadow(10px 15px 10px rgba(255, 143, 178, 0.25));
-}
-
-main .order {
-  background: linear-gradient(
-    285.38deg,
-    #29dfff 30.05%,
-    rgba(41, 223, 255, 0) 133.19%
-  );
-  filter: drop-shadow(10px 15px 10px rgba(41, 223, 255, 0.25));
-}
-
-main .year {
-  background: linear-gradient(
-    285.38deg,
-    #ab84c8 30.05%,
-    rgba(241, 201, 236, 0) 133.19%
-  );
-  filter: drop-shadow(10px 15px 10px rgba(241, 201, 236, 0.8));
-}
-
-main .elipse1,
-main .elipse2,
-main .elipse3 {
-  width: 90px;
-  height: 90px;
-  border-radius: 100%;
-  background: rgba(253, 211, 228, 0.3);
-}
-
-main .elipse1 {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-main .elipse2 {
-  position: absolute;
-  top: 30px;
-  right: 50px;
-}
-
-main .elipse3 {
-  position: absolute;
-  top: 50px;
-  right: 80px;
-}
-
-/* Revenue */
-
-main .revenue {
-  background: #ffffff;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-}
-
-main .dropdown button {
-  width: 80px;
-  height: 25px;
-  font-size: 10px;
-  background: #cecece;
-  border-radius: 10px;
-  color: #4f4e4e;
-}
-
-main .revenue table .date {
-  color: black;
-}
-
-main .revenue table th {
-  text-align: start;
-  padding-bottom: 0;
-  padding-left: 10px;
-  font-size: 15px;
-  color: #cecece;
-}
-
-main .revenue table td {
-  width: 30px;
-  text-align: center;
-  font-size: 12px;
-}
-
-main .revenue .thisMonth {
-  background-color: #00f1ff;
-}
-
-main .revenue .lastMonth {
-  background-color: #ffb8c6;
-}
-
-/* Recent */
-
-main .recent {
-  background: #ffffff;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-}
-
-main .recent table {
+.container-fluid {
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-main .recent table th,
-.recent table td {
-  text-align: center;
-  width: 20%;
+main {
+  display: flex;
+  flex-direction: column;
+  width: 93%;
+  padding: 10px;
+  overflow-y: scroll;
+  height: 530px;
 }
 
-main .recent table td {
-  font-size: 15px;
-  color: #cecece;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-main .recent table .left {
-  text-align: left;
-  padding-left: 10px;
-}
-
-main .recent .line {
-  border: 1px solid #cecece;
-}
-
-@media (max-width: 992px) {
-  main .year h3 {
-    font-size: 20px;
-  }
+main::-webkit-scrollbar {
+  display: none;
 }
 
 @media (max-width: 768px) {
-  .icon {
-    width: 25px;
-    height: 25px;
-  }
-  h3 {
-    font-size: 20px;
-  }
-  h5 {
-    font-size: 10px;
-  }
-  main .year h3 {
-    font-size: 15px;
-  }
-  main .elipse1,
-  main .elipse2,
-  main .elipse3 {
-    width: 50px;
-    height: 50px;
-  }
-  main .elipse1 {
-    top: 5px;
-    right: 5px;
-  }
-  main .elipse2 {
-    top: 20px;
-    right: 20px;
-  }
-  main .elipse3 {
-    top: 35px;
-    right: 35px;
-  }
-  main .revenue table th,
-  main .revenue table td {
-    font-size: 12px;
-  }
-  main .revenue table td.info {
-    font-size: 7px;
-  }
-  main .recent h3,
-  .revenue h3 {
-    font-size: 16px;
-  }
-  main .recent table th {
-    font-size: 13px;
-  }
-  main .recent table td {
-    font-size: 11px;
-  }
-}
-
-@media (max-width: 576px) {
-  header.row {
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-  header .col-md-1 {
-    flex-direction: column;
-    width: 15%;
-  }
-  header .col-md-11 {
-    flex-direction: column;
-    width: 85%;
-    align-items: center;
-    padding-top: 5px;
-  }
-  nav {
-    padding: 8px;
-  }
-  nav .col {
-    padding-left: 0;
-  }
-  nav .icon {
-    margin-right: 10px;
-  }
   main {
-    padding: 20px;
-  }
-  main .row .revenue {
-    margin: 10px;
-  }
-  main .row .revenue .row {
-    padding: 10px;
-  }
-  main .recent {
-    margin: 10px;
-  }
-  main .recent .p-md-3 {
-    padding: 10px;
-  }
-  main .recent table th {
-    font-size: 8px;
-  }
-  main .row .recent .line {
-    padding: 0;
-  }
-  main .col-md-4 {
-    margin-bottom: 10px;
-  }
-  main h3,
-  main .year h3 {
-    font-size: 30px;
-  }
-  main h5 {
-    font-size: 12px;
-  }
-  main .recent table .left {
-    text-align: left;
-    padding-left: 0px;
+    width: 90%;
+    padding-right: 30px;
+    height: 300px;
   }
 }
 </style>
