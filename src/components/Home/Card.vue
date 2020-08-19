@@ -1,21 +1,35 @@
 <template>
-  <div>
+  <div v-show="active">
     <div class="select">
       <img class="image" :src="image" @click="addToCart" />
       <div v-show="select" class="tick"></div>
     </div>
     <h5>{{name}}</h5>
     <h5>Rp. {{price}}</h5>
+    <!-- <h5>{{id}}</h5> -->
+    <!-- <h5>{{select}}</h5>
+    <h5>{{total}}</h5> -->
   </div>
 </template>
 
 <script>
 export default {
   name: 'Card',
-  props: ['name', 'image', 'price'],
+  props: ['name', 'image', 'price', 'id'],
   data () {
     return {
-      select: false
+      select: false,
+      active: true
+    }
+  },
+  mounted () {
+    // this.selectItem = false
+  },
+  computed: {
+    total: function () {
+      let totalPrice = 0
+      totalPrice += this.price
+      return totalPrice
     }
   },
   methods: {
@@ -26,7 +40,20 @@ export default {
           empty: false,
           name: this.name,
           image: this.image,
-          price: this.price
+          price: this.price,
+          id: this.id,
+          quality: 1,
+          plus: this.price
+        })
+      } else {
+        this.$emit('addToCart', {
+          count: -1,
+          empty: false,
+          name: this.name,
+          image: this.image,
+          price: this.price,
+          id: this.id
+          // selectItem: this.selectItem
         })
       }
 

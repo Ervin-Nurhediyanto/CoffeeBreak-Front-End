@@ -66,17 +66,19 @@ export default {
       axios
         .patch('http://localhost:4000/api/v1/products/' + id, product)
         .then((res) => {
-          this.getAllData()
-          alert('Update SUccess')
+
         })
+      this.getAllData()
+      alert('Update SUccess')
     },
     deleteData (products, id) {
       axios
         .delete('http://localhost:4000/api/v1/products/' + id)
         .then((res) => {
-          this.getAllData()
-          alert('Delete Success')
+
         })
+      this.getAllData()
+      alert('Delete Success')
     }
   }
 }

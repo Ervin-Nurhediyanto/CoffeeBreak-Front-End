@@ -59,21 +59,29 @@ export default {
       Hasil: ''
     }
   },
+  // mounted () {
+  //   this.form.name = ''
+  //   this.form.image = ''
+  //   this.form.price = ''
+  //   this.form.idCategory = ''
+  // },
   methods: {
     add () {
       axios.post('http://localhost:4000/api/v1/products', this.form)
         .then((res) => {
           this.getData()
-          alert(this.Hasil)
-          this.form.name = ''
-          this.form.image = ''
-          this.form.price = ''
-          this.form.idCategory = ''
         })
+      // this.getData()
+      this.Hasil = 'ADD DATA SUCCESS'
+      alert(this.Hasil)
+      // this.form.name = ''
+      // this.form.image = ''
+      // this.form.price = ''
+      // this.form.idCategory = ''
     },
     getData () {
       axios.get('http://localhost:4000/api/v1/products').then((res) => {
-        this.Hasil = 'ADD DATA SUCCESS'
+        // this.Hasil = 'ADD DATA SUCCESS'
       })
     }
   }

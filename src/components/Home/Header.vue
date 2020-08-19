@@ -3,7 +3,7 @@
     <img class="icon" src="../../assets/menu.png" />
     <h2 class>Food Items</h2>
     <div class="row">
-      <img class="icon" @click="actived" src="../../assets/magnifying-glass.png" />
+      <img class="icon" src="../../assets/magnifying-glass.png" />
     </div>
   </header>
 </template>
@@ -106,9 +106,6 @@ input {
   }
   article h3 {
     font-size: 13px;
-  }
-  article h4.text {
-    /* font-size: 9px; */
   }
   aside h3 {
     font-size: 12px;

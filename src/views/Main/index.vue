@@ -7,7 +7,8 @@
             <Header />
             <div class="row">
               <Navbar />
-              <router-view v-on:updateCart="addToCart($event)" />
+              <!-- <h1>{{totals}}</h1> -->
+              <router-view v-on:updateCart="addToCart($event)" :select="select" />
             </div>
           </div>
           <aside class="col-md-3 p-md-0 col-sm-3 p-sm-0">
@@ -19,20 +20,24 @@
                   :name="Product.name"
                   :image="Product.image"
                   :price="Product.price"
-                  v-on:plus="totalPrice($event)"
+                  :id="Product.id"
+                  v-on:plus="plusTotal($event)"
+                  v-on:minus="minusTotal($event)"
                 />
               </div>
               <CheckoutPay
-              :name="cartProducts.name"
-              :image="cartProducts.image"
-              :price="cartProducts.price"
-              v-on:cancel="cancelCart($event)"
+                  :totalPrice="totals"
+                  v-on:cancel="cancelCart($event)"
               />
             </div>
           </aside>
         </div>
         <Add />
-        <CheckModal />
+        <CheckModal
+          :products='checkoutProducts'
+          :totalPrice='totals'
+          :quality="quality"
+        />
       </div>
     </div>
   </div>
@@ -64,27 +69,53 @@ export default {
     return {
       empty: true,
       count: 0,
+      select: false,
       cartProducts: [],
-      totals: []
+      checkoutProducts: [],
+      totals: 0,
+      quality: 1
     }
   },
   methods: {
     addToCart (addToCart) {
-      this.count = this.count + addToCart.count
-      this.empty = addToCart.empty
-      if (addToCart.name !== this.cartProducts.name) {
-        this.cartProducts.push(addToCart)
+      if (this.count >= 0) {
+        this.count += addToCart.count
+        if (this.count < 0) {
+          this.count = 0
+        }
       }
+      if (this.count === 0) {
+        this.cartProducts = []
+      }
+      this.empty = addToCart.empty
+      this.totals += addToCart.plus
+      this.cartProducts.push(addToCart)
+      this.checkoutProducts.push(addToCart)
     },
-    // addItemCart (addItemCart) {
-    //   this.empty = addItemCart
-    // },
-    totalPrice (totalPrice) {
-      this.total = totalPrice
+    plusTotal (plusTotal) {
+      this.totals += plusTotal.total
+      // this.quality = plusTotal.quality
+      this.checkoutProducts.map((item) => {
+        item.id = plusTotal.id
+        return item.quality + 1
+      })
+    },
+    minusTotal (minusTotal) {
+      this.totals -= minusTotal.total
+      this.count += minusTotal.count
+      if (this.count === 0) {
+        this.empty = true
+        this.cartProducts = []
+      }
+      if (this.count < 0) {
+        this.count = 0
+        this.cartProducts = []
+      }
     },
     cancelCart (cancelCart) {
       this.empty = cancelCart.empty
       this.count = cancelCart.count
+      this.totals = 0
       this.cartProducts = []
     }
   }

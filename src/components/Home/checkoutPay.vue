@@ -2,7 +2,7 @@
   <div class="btm col">
     <div class="row pl-md-3 pr-md-3 pl-sm-3 pr-sm-3">
       <h3>Total:</h3>
-      <h3>Rp.{{total}}*</h3>
+      <h3>Rp.{{totalPrice}}*</h3>
     </div>
     <p>*Belum termasuk ppn</p>
     <div class="checkout" data-toggle="modal" data-target="#checkModal">
@@ -17,16 +17,21 @@
 <script>
 export default {
   name: 'Checkout',
-  props: ['name', 'image', 'price'],
+  props: ['name', 'image', 'price', 'id', 'totalPrice'],
   data () {
-    return {}
+    return {
+      total: 0
+    }
   },
-  mounted: {
-    totalPrice () {}
+  mounted () {
+    this.getTotal()
   },
   methods: {
     cancel () {
-      this.$emit('cancel', { empty: true, count: 0 })
+      this.$emit('cancel', { empty: true, count: 0, select: false })
+    },
+    getTotal () {
+      this.total += this.price
     }
   }
 }
@@ -215,21 +220,10 @@ aside .btm .cancel {
   aside .scroll::-webkit-scrollbar {
     display: none;
   }
-  /* aside .btm .checkout {
-    margin-top: 10px;
-  }
-  aside .btm .checkout {
-    padding: 5px;
-  }
-  aside .btm .cancel {
-    padding: 10px;
-  } */
   .checkout, .cancel {
       height: 30px;
       justify-content: center;
       font-weight: bold;
-      /* margin-top: 20px; */
-      /* padding: 10px; */
   }
 }
 

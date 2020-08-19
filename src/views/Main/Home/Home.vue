@@ -6,6 +6,8 @@
           :name="product.name"
           :image="product.image"
           :price="product.price"
+          :id="product.id"
+          :select="select"
           v-on:addToCart="updateCart($event)"
         />
       </article>
@@ -27,7 +29,7 @@
           </div>
         </div>
         <div class="col-md-2 col-sm-2">
-          <!-- <h1>{{empty}}</h1> -->
+          {{select}}
         </div>
       </article>
     </div>
@@ -43,17 +45,16 @@ export default {
   components: {
     Card
   },
+  props: ['select'],
   data () {
     return {
       products: [],
       allProduct: [],
+      checkId: [],
       totalPage: '',
       status: '',
       page: '',
-      idCategory: '',
-      output: '',
-      empty: true,
-      navbarAct: true
+      empty: true
     }
   },
   mounted () {
@@ -62,13 +63,15 @@ export default {
   },
   methods: {
     getAllData () {
-      axios.get('http://localhost:4000/api/v1/products').then((res) => {
+      // axios.get('http://localhost:4000/api/v1/products').then((res) => {
+      axios.get(process.env.VUE_APP_URL_PRODUCT).then((res) => {
         this.allProduct = res.data.result
         this.totalPage = Math.ceil(res.data.result.length / 6)
       })
     },
     getData () {
-      axios.get('http://localhost:4000/api/v1/products/?page=1').then((res) => {
+      // axios.get('http://localhost:4000/api/v1/products/?page=1').then((res) => {
+      axios.get(process.env.VUE_APP_URL_PRODUCT + '/?page=1').then((res) => {
         this.products = res.data.result
         this.page = res.data.page
         console.log(res.data.result)
@@ -77,7 +80,8 @@ export default {
     nextPage () {
       this.page++
       axios
-        .get('http://localhost:4000/api/v1/products/?page=' + this.page)
+        // .get('http://localhost:4000/api/v1/products/?page=' + this.page)
+        .get(process.env.VUE_APP_URL_PRODUCT + '/?page=' + this.page)
         .then((res) => {
           this.products = res.data.result
         })
@@ -89,14 +93,27 @@ export default {
     prevPage () {
       this.page--
       axios
-        .get('http://localhost:4000/api/v1/products/?page=' + this.page)
+        // .get('http://localhost:4000/api/v1/products/?page=' + this.page)
+        .get(process.env.VUE_APP_URL_PRODUCT + '/?page=' + this.page)
         .then((res) => {
           this.products = res.data.result
         })
     },
     updateCart (updateCart) {
-      this.empty = updateCart.count
-      this.$emit('updateCart', { count: 1, empty: false, name: updateCart.name, image: updateCart.image, price: updateCart.price })
+      if (this.checkId !== updateCart.id) {
+        this.checkId.push(updateCart.id)
+        this.empty = updateCart.count
+        this.$emit('updateCart', {
+          count: updateCart.count,
+          empty: false,
+          name: updateCart.name,
+          image: updateCart.image,
+          price: updateCart.price,
+          id: updateCart.id,
+          quality: updateCart.quality,
+          plus: updateCart.plus
+        })
+      }
     }
   }
 }
@@ -201,8 +218,6 @@ article .select .image {
   }
   article h3 {
     font-size: 13px;
-  }
-  article h4.text {
   }
   aside h3 {
     font-size: 12px;

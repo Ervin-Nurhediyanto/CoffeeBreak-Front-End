@@ -2,7 +2,7 @@
   <div class="row cart m-md-0 m-sm-0 justify-content-center">
       <h2>
         Cart
-        <span class="count" @click="toCart" >{{count}}</span>
+        <span class="count" @click="toCart" >{{countItem}}</span>
       </h2>
     </div>
 </template>
@@ -11,6 +11,11 @@
 export default {
   name: 'Cart',
   props: ['count'],
+  computed: {
+    countItem: function () {
+      return this.count
+    }
+  },
   methods: {
     toCart () {
       this.$emit('toCart', false)
@@ -65,9 +70,6 @@ button {
   }
   article h3 {
     font-size: 13px;
-  }
-  article h4.text {
-    /* font-size: 9px; */
   }
   aside h3 {
     font-size: 12px;

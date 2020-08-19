@@ -1,5 +1,5 @@
 <template>
-  <div class="row m-md-0 m-sm-0 justify-content-start list">
+  <div v-show="active" class="row m-md-0 m-sm-0 justify-content-start list">
     <div class="col p-md-3 p-sm-1">
       <div class="row m-md-2 p-md-0 m-sm-2 p-sm-0 select">
         <img class="image-cart" :src="image" />
@@ -11,7 +11,8 @@
               <button class="qly">{{quality}}</button>
               <button class="pls" @click="plus">+</button>
             </div>
-            <h5>Rp.{{price*quality}}</h5>
+            <h5>Rp.{{total}}</h5>
+            <!-- <h5>{{total}}</h5> -->
           </div>
         </div>
       </div>
@@ -23,29 +24,34 @@
 
 export default {
   name: 'Checkout',
-  props: ['name', 'image', 'price'],
+  props: ['name', 'image', 'price', 'id'],
   data () {
     return {
-      total: 0,
-      quality: 1
+      quality: 1,
+      active: true
     }
   },
   mounted () {
-    this.totalPrice()
+  },
+  computed: {
+    total: function () {
+      let totalPrice = 0
+      totalPrice += (this.price * this.quality)
+      return totalPrice
+    }
   },
   methods: {
-    totalPrice () {
-      this.total += this.price
-    },
     plus () {
       this.quality += 1
-      this.$emit('plus', this.price * this.quality)
+      this.$emit('plus', { total: this.price, quality: this.quality, id: this.id })
     },
     minus () {
-      if (this.quality > 0) {
+      if (this.quality > 1) {
         this.quality -= 1
+        this.$emit('minus', { total: this.price, count: 0, quality: this.quality })
       } else {
-        alert('jumlah tidak bisa kurang dari 0')
+        this.active = false
+        this.$emit('minus', { total: this.price, count: -1, quality: this.quality })
       }
     },
     cancel () {
@@ -223,9 +229,6 @@ aside .btm .cancel {
   }
   article h3 {
     font-size: 13px;
-  }
-  article h4.text {
-    /* font-size: 9px; */
   }
   aside h3 {
     font-size: 12px;

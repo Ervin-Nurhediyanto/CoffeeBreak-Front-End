@@ -15,14 +15,10 @@
             </div>
             <div class="row justify-content-between">
               <div class="col-md-6 col-sm-6 list">
-                <div class="d-flex justify-content-start">
-                  <h5>Coffee Latte 1x</h5>
-                </div>
-                <div class="d-flex justify-content-start">
-                  <h5>Black Forest 1x</h5>
-                </div>
-                <div class="d-flex justify-content-start">
-                  <h5>Salmon Truffle Teriyaki 1x</h5>
+                <div v-for="product in products" :key="product.id">
+                  <div class="d-flex justify-content-start">
+                    <h5>{{product.name}} {{product.quality}}x</h5>
+                  </div>
                 </div>
                 <div class="d-flex justify-content-start">
                   <h5>Ppn 10%</h5>
@@ -33,14 +29,20 @@
                   <div
                     class="col-md-6 p-md-0 m-md-0 col-sm-6 p-sm-0 m-sm-0 d-flex justify-content-end align-items-end total"
                   >
-                    <h5>Total :</h5>
+                    <h5><b>Total :</b></h5>
                   </div>
                   <div class="col-md-6 pr-md-0 col-sm-6 pr-sm-0">
-                    <h5>Rp.15.000</h5>
-                    <h5>Rp.30.000</h5>
-                    <h5>Rp.60.000</h5>
-                    <h5>Rp.10.500</h5>
-                    <h5>Rp.115.500</h5>
+                      <div v-for="product in products" :key="product.id">
+                        <div class="d-flex justify-content-start">
+                          <h5>Rp.{{product.price}}</h5>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-start">
+                        <h5>(Rp.{{totalPrice / 10}})</h5>
+                      </div>
+                    <div class="d-flex justify-content-start">
+                      <h5><b>Rp.{{totalPrice + (totalPrice / 10)}}</b></h5>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -49,6 +51,7 @@
               <div class="d-flex justify-content-start">
                 <h5>Payment: Cash</h5>
               </div>
+              <!-- <h2>{{products}}</h2> -->
             </div>
             <div class="col mb-md-2 mb-sm-2">
               <button type="button" class="btn btn-primary">Print</button>
@@ -64,7 +67,22 @@
 
 <script>
 export default {
-  name: 'Checkout'
+  name: 'Checkout',
+  props: ['products', 'totalPrice'],
+  computed: {
+    // total: function () {
+    //   let totalPrice = 0
+    //   this.products.map((item) => {
+    //     totalPrice += item.price
+    //   })
+    //   return totalPrice
+    // }
+    // priceTotal: function () {
+    //   let totalPrice = 0
+    //   totalPrice += (this.products.price * this.quality)
+    //   return totalPrice
+    // }
+  }
 }
 </script>
 
@@ -105,6 +123,7 @@ export default {
 
 .modal .modal-body .or {
   text-align: center;
+  font-size: 20px;
 }
 
 .modal .modal-body .btn-primary {
@@ -119,4 +138,8 @@ export default {
   width: 340px;
   height: 44px;
 }
+.modal-title {
+  font-size: 20px;
+}
+
 </style>
